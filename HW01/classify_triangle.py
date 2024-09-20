@@ -1,23 +1,19 @@
 def classify_triangle(a, b, c):
-    # Check if inputs are valid (positive numbers and form a triangle)
-    if a <= 0 or b <= 0 or c <= 0:
-        return "InvalidInput"
-    
-    if a + b <= c or a + c <= b or b + c <= a:
-        return "NotATriangle"
-    
-    # Determine triangle type by comparing side lengths
-    if a == b and b == c:
-        triangle_type = "Equilateral"
-    elif a == b or b == c or a == c:
-        triangle_type = "Isosceles"
-    else:
-        triangle_type = "Scalene"
-    
-    # Check if it's a right triangle using Pythagoras' theorem
-    if round(a**2 + b**2, 5) == round(c**2, 5) or \
-       round(a**2 + c**2, 5) == round(b**2, 5) or \
-       round(b**2 + c**2, 5) == round(a**2, 5):
-        triangle_type += " and Right"
-    
-    return triangle_type
+    # First, check if the input values form a valid triangle
+    if a + b <= c or b + c <= a or a + c <= b:
+        return "Not a triangle"
+
+    # Check for equilateral triangle
+    if a == b == c:
+        return "Equilateral"
+
+    # Check for right triangle using the Pythagorean theorem
+    if a**2 + b**2 == c**2 or b**2 + c**2 == a**2 or a**2 + c**2 == b**2:
+        return "Right"
+
+    # Check for isosceles triangle
+    if a == b or b == c or a == c:
+        return "Isosceles"
+
+    # If none of the above, it's a scalene triangle
+    return "Scalene"
